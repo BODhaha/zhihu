@@ -29,6 +29,13 @@ class UserCtl {
     ctx.body = user
   }
 
+  async checkOwner(ctx, next) {
+    if(ctx.params.id !== ctx.state.user._id) {
+      ctx.throw(403, '没有权限');
+    }
+    await next();
+  }
+
   async update(ctx) {
     ctx.verifyParams({
       name: {type: 'string', required: false},
@@ -50,15 +57,15 @@ class UserCtl {
   }
 
   async login(ctx) {
-    console.log(ctx)
     ctx.verifyParams({
       name: { type: 'string', required: true },
       password: { type: 'password', required: true },
     })
     const user = await User.findOne(ctx.request.body)
     if(!user) { ctx.throw(401, '用户名或密码不正确') }
-    const { __id, name } = user
-    const token = jsonwebtoken.sign({ __id, name }, secret, { expiresIn: '1d' })
+    const { name } = user
+    const _id = user._id.toHexString();
+    const token = jsonwebtoken.sign({ _id, name }, secret, { expiresIn: '1d' })
     ctx.body = { token }
   }
 }
