@@ -26,7 +26,11 @@ const userSchema = new Schema({
       entrance_year: { type: Number },
     }],
     select: false
+  },
+  following: {
+    type: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    select: false,
   }
 })
 
-module.exports = model('user', userSchema)
+module.exports = model('User', userSchema);
