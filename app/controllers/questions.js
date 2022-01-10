@@ -1,5 +1,4 @@
 const Question = require('../models/questions');
-const { secret } = require('../config');
 
 class QuestionsCtl {
   async find(ctx) {

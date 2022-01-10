@@ -1,7 +1,6 @@
 const Topic = require('../models/topics');
 const User = require('../models/users');
 const Question = require('../models/questions');
-const { secret } = require('../config');
 
 class TopicsCtl {
   async find(ctx) {
