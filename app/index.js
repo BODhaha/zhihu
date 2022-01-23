@@ -1,3 +1,4 @@
+const mount = require('koa-mount');
 const Koa = require('koa')
 const koaBody = require('koa-body')
 const koaStatic = require('koa-static')
@@ -29,6 +30,9 @@ app.use(parameter(app))
 
 routing(app)
 
-app.listen(3000, () => {
+const mounttedApp = new Koa();
+
+mounttedApp.use(mount('/zhihu', app));
+mounttedApp.listen(3000, () => {
   console.log('程序启动在 3000 端口了')
 })
