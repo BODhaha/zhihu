@@ -1,5 +1,6 @@
+const { root } = require('../config');
 const Router = require('koa-router');
-const router = new Router();
+const router = new Router({ prefix: root });
 const { index, upload } = require('../controllers/home');
 
 router.get('/', index);

@@ -1,6 +1,7 @@
+const { root } = require('../config');
 const jwt = require('koa-jwt');
 const Router = require('koa-router');
-const router = new Router({ prefix: '/questions/:questionId/answers/:answerId/comments' });
+const router = new Router({ prefix: `${root}/questions/:questionId/answers/:answerId/comments` });
 const {
   find,
   findById,
